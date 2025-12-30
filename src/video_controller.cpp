@@ -167,6 +167,84 @@ void VideoController::PlayLine() {
 	playback.Start(10);
 }
 
+void VideoController::PlaySelectionBefore() {
+	if (!provider) return;
+	Stop();
+
+	int end = context->audioController->GetPrimaryPlaybackRange().begin();
+	int begin = std::max(0, end - 500);
+	context->audioController->PlayRange(TimeRange(begin, end));
+
+	// Round-trip conversion to convert start to exact
+	int startFrame = FrameAtTime(begin, agi::vfr::START);
+	start_ms = TimeAtFrame(startFrame);
+	end_frame = FrameAtTime(end, agi::vfr::END) + 1;
+
+	JumpToFrame(startFrame);
+
+	playback_start_time = std::chrono::steady_clock::now();
+	playback.Start(10);
+}
+
+void VideoController::PlaySelectionAfter() {
+	if (!provider) return;
+	Stop();
+
+	int begin = context->audioController->GetPrimaryPlaybackRange().end();
+	int end = begin + 500;
+	context->audioController->PlayRange(TimeRange(begin, end));
+
+	// Round-trip conversion to convert start to exact
+	int startFrame = FrameAtTime(begin, agi::vfr::START);
+	start_ms = TimeAtFrame(startFrame);
+	end_frame = FrameAtTime(end, agi::vfr::END) + 1;
+
+	JumpToFrame(startFrame);
+
+	playback_start_time = std::chrono::steady_clock::now();
+	playback.Start(10);
+}
+
+void VideoController::PlaySelectionEnd() {
+	if (!provider) return;
+	Stop();
+
+	TimeRange times(context->audioController->GetPrimaryPlaybackRange());
+	int end = times.end();
+	int begin = end - std::min(500, times.length());
+	context->audioController->PlayRange(TimeRange(begin, end));
+
+	// Round-trip conversion to convert start to exact
+	int startFrame = FrameAtTime(begin, agi::vfr::START);
+	start_ms = TimeAtFrame(startFrame);
+	end_frame = FrameAtTime(end, agi::vfr::END) + 1;
+
+	JumpToFrame(startFrame);
+
+	playback_start_time = std::chrono::steady_clock::now();
+	playback.Start(10);
+}
+
+void VideoController::PlaySelectionBegin() {
+	if (!provider) return;
+	Stop();
+
+	TimeRange times(context->audioController->GetPrimaryPlaybackRange());
+	int begin = times.begin();
+	int end = begin + std::min(500, times.length());
+	context->audioController->PlayRange(TimeRange(begin, end));
+
+	// Round-trip conversion to convert start to exact
+	int startFrame = FrameAtTime(begin, agi::vfr::START);
+	start_ms = TimeAtFrame(startFrame);
+	end_frame = FrameAtTime(end, agi::vfr::END) + 1;
+
+	JumpToFrame(startFrame);
+
+	playback_start_time = std::chrono::steady_clock::now();
+	playback.Start(10);
+}
+
 void VideoController::Stop() {
 	if (IsPlaying()) {
 		playback.Stop();

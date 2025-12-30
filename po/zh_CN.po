@@ -2625,6 +2625,38 @@ msgstr "缩小"
 msgid "Zoom video out"
 msgstr "缩小视频"
 
+#: ../src/command/video.cpp:776 ../src/command/video.cpp:777
+msgid "Play 500 ms before selection"
+msgstr "播放所选部分之前 500 毫秒"
+
+#: ../src/command/video.cpp:778
+msgid "Play 500 ms before selection with both av in sync"
+msgstr "播放所选部分之前 500 毫秒，并保持音视频同步"
+
+#: ../src/command/video.cpp:788 ../src/command/video.cpp:789
+msgid "Play 500 ms after selection"
+msgstr "播放所选部分之后 500 毫秒"
+
+#: ../src/command/video.cpp:790
+msgid "Play 500 ms after selection with both av in sync"
+msgstr "播放所选部分之后 500 毫秒，并保持音视频同步"
+
+#: ../src/command/video.cpp:800 ../src/command/video.cpp:801
+msgid "Play last 500 ms of selection"
+msgstr "播放所选部分末 500 毫秒"
+
+#: ../src/command/video.cpp:802
+msgid "Play last 500 ms of selection with both av in sync"
+msgstr "播放所选部分末 500 毫秒，并保持音视频同步"
+
+#: ../src/command/video.cpp:812 ../src/command/video.cpp:813
+msgid "Play first 500 ms of selection"
+msgstr "播放所选部分头 500 毫秒"
+
+#: ../src/command/video.cpp:814
+msgid "Play first 500 ms of selection with both av in sync"
+msgstr "播放所选部分头 500 毫秒，并保持音视频同步"
+
 #: ../src/command/vis_tool.cpp:73 ../src/command/vis_tool.cpp:74
 msgid "Standard"
 msgstr "标准"

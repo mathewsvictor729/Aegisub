@@ -151,6 +151,17 @@ public:
 	void PrevFrame();
 	/// Seek to the beginning of the current line, then play to the end of it
 	void PlayLine();
+
+	/// Play 500 ms before selection
+	/// with both av in sync
+	void PlaySelectionBefore();
+	/// Play 500 ms after selection with both av in sync
+	void PlaySelectionAfter();
+	/// Play last 500 ms of selection with both av in sync
+	void PlaySelectionEnd();
+	/// Play first 500 ms of selection with both av in sync
+	void PlaySelectionBegin();
+
 	/// Stop playing
 	void Stop();
 

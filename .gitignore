@@ -9,3 +9,6 @@ build*/
 !/subprojects/csri
 !/subprojects/iconv
 !/subprojects/luabins
+
+# Visual Studio
+/.vs/*

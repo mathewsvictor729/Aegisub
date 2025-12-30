@@ -769,6 +769,54 @@ struct video_zoom_out final : public validator_video_attached {
 		c->videoDisplay->SetWindowZoom(c->videoDisplay->GetWindowZoom() - .125);
 	}
 };
+
+struct video_play_selection_before final : public validator_video_loaded {
+	CMD_NAME("video/play/selection/before")
+	CMD_ICON(button_playline)
+	STR_MENU("Play 500 ms before selection")
+	STR_DISP("Play 500 ms before selection")
+	STR_HELP("Play 500 ms before selection with both av in sync")
+
+	void operator()(agi::Context* c) override {
+		c->videoController->PlaySelectionBefore();
+	}
+};
+
+struct video_play_selection_after final : public validator_video_loaded {
+	CMD_NAME("video/play/selection/after")
+	CMD_ICON(button_playline)
+	STR_MENU("Play 500 ms after selection")
+	STR_DISP("Play 500 ms after selection")
+	STR_HELP("Play 500 ms after selection with both av in sync")
+
+	void operator()(agi::Context* c) override {
+		c->videoController->PlaySelectionAfter();
+	}
+};
+
+struct video_play_selection_end final : public validator_video_loaded {
+	CMD_NAME("video/play/selection/end")
+	CMD_ICON(button_playline)
+	STR_MENU("Play last 500 ms of selection")
+	STR_DISP("Play last 500 ms of selection")
+	STR_HELP("Play last 500 ms of selection with both av in sync")
+
+	void operator()(agi::Context* c) override {
+		c->videoController->PlaySelectionEnd();
+	}
+};
+
+struct video_play_selection_begin final : public validator_video_loaded {
+	CMD_NAME("video/play/selection/begin")
+	CMD_ICON(button_playline)
+	STR_MENU("Play first 500 ms of selection")
+	STR_DISP("Play first 500 ms of selection")
+	STR_HELP("Play first 500 ms of selection with both av in sync")
+
+	void operator()(agi::Context* c) override {
+		c->videoController->PlaySelectionBegin();
+	}
+};
 }
 
 namespace cmd {
@@ -814,5 +862,9 @@ namespace cmd {
 		reg(std::make_unique<video_zoom_50>());
 		reg(std::make_unique<video_zoom_in>());
 		reg(std::make_unique<video_zoom_out>());
+		reg(std::make_unique<video_play_selection_before>());
+		reg(std::make_unique<video_play_selection_after>());
+		reg(std::make_unique<video_play_selection_end>());
+		reg(std::make_unique<video_play_selection_begin>());
 	}
 }
