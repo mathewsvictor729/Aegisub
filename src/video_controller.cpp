@@ -148,18 +148,37 @@ void VideoController::Play() {
 	playback.Start(10);
 }
 
+//void VideoController::PlayLine() {
+//	Stop();
+//
+//	AssDialogue *curline = context->selectionController->GetActiveLine();
+//	if (!curline) return;
+//
+//	context->audioController->PlayRange(TimeRange(curline->Start, curline->End));
+//
+//	// Round-trip conversion to convert start to exact
+//	int startFrame = FrameAtTime(context->selectionController->GetActiveLine()->Start, agi::vfr::START);
+//	start_ms = TimeAtFrame(startFrame);
+//	end_frame = FrameAtTime(context->selectionController->GetActiveLine()->End, agi::vfr::END) + 1;
+//
+//	JumpToFrame(startFrame);
+//
+//	playback_start_time = std::chrono::steady_clock::now();
+//	playback.Start(10);
+//}
+
 void VideoController::PlayLine() {
+	if (!provider) return;
 	Stop();
 
-	AssDialogue *curline = context->selectionController->GetActiveLine();
-	if (!curline) return;
-
-	context->audioController->PlayRange(TimeRange(curline->Start, curline->End));
+	int begin = context->audioController->GetPrimaryPlaybackRange().begin();
+	int end = context->audioController->GetPrimaryPlaybackRange().end();
+	context->audioController->PlayRange(TimeRange(begin, end));
 
 	// Round-trip conversion to convert start to exact
-	int startFrame = FrameAtTime(context->selectionController->GetActiveLine()->Start, agi::vfr::START);
+	int startFrame = FrameAtTime(begin, agi::vfr::START);
 	start_ms = TimeAtFrame(startFrame);
-	end_frame = FrameAtTime(context->selectionController->GetActiveLine()->End, agi::vfr::END) + 1;
+	end_frame = FrameAtTime(end, agi::vfr::END) + 1;
 
 	JumpToFrame(startFrame);
 
